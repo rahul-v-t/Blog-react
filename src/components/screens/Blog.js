@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import styled from "styled-components";
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 export default function Blog() {
     const [blogs,setBlogs] = useState([]);
@@ -17,14 +18,16 @@ export default function Blog() {
     let renderItems = () => {
         return blogs.map((blog) => (
                 <List key={blog.id}>
-                    <Box>
-                        <Round>
-                            <Img src={blog.author.image} alt="Image" />
-                        </Round>
-                        <Title> {blog.title} </Title>
-                        <P>A Guest posted by <Span> {blog.author.name} </Span> on 22 oct 2013</P>
-                        <Para> {blog.description} </Para>
-                    </Box>
+                    <Link to={`/article/${blog.id}`}>
+                        <Box>
+                            <Round>
+                                <Img src={blog.author.image} alt="Image" />
+                            </Round>
+                            <Title> {blog.title} </Title>
+                            <P>A Guest posted by <Span> {blog.author.name} </Span> on 22 oct 2013</P>
+                            <Para> {blog.description} </Para>
+                        </Box>
+                    </Link>
                 </List>
         ));
     };
@@ -81,6 +84,7 @@ const Box = styled.div `
     position : relative;
     padding: 100px;
     border: 1px solid #7e7e7e;
+    cursor: pointer;
 `;
 const P = styled.p `
     text-align: center;
